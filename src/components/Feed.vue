@@ -1,5 +1,6 @@
 <template>
   <div class="feed">
+    <div class="feed__header">Welcome to (not) twitter!</div>
     <Tweet v-for='tweet in tweets' :key='tweet.user+tweet.text' :user='tweet.user' :text='tweet.text'/>
     <div class='new-tweet-row'>
       <textarea placeholder='user' v-model='user' class='userTweet'/>
@@ -50,6 +51,10 @@ export default {
   .feed {
     text-align: center;
     width: 588px;
+  }
+
+  .feed__header {
+    margin: 10px 0;
   }
 
   .new-tweet-row {
