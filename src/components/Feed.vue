@@ -5,13 +5,14 @@
     <div class='new-tweet-row'>
       <textarea placeholder='user' v-model='user' class='userTweet'/>
       <textarea placeholder='whats happening' v-model='text' class='textTweet'/>
-      <button class='new-tweet-row__button' v-on:click='addNewUser'>Tweet</button>
+      <button class='new-tweet-row__button' v-on:click='addNewTweet'>Tweet</button>
     </div>
   </div>
 </template>
 
 <script>
 import Tweet from './Tweet'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -21,20 +22,17 @@ export default {
   data () {
     return {
       user: '',
-      text: '',
-      tweets: [
-        {
-          text: 'my first tweet',
-          user: 'user 1'
-        }
-      ]
+      text: ''
     }
   },
+  computed: mapState({
+    tweets: 'tweets'
+  }),
   methods: {
-    addNewUser: function () {
+    addNewTweet: function () {
       const {user, text} = this
       if (user && text) {
-        this.tweets.unshift({
+        this.$store.commit('ADD_NEW_TWEET', {
           user,
           text
         })
